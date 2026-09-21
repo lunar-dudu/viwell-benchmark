@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+.ipynb_checkpoints/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Secrets — never commit API keys
+.env
+.env.*
+*.key
+*.pem
+
+# Run outputs
+outputs/
+results/
+logs/
+
+# Annotation working files. Raw expert annotation is held separately from public
+# benchmark content; these paths exist so working files cannot be committed by accident.
+private_annotations/
+expert_annotations_private/
+
+tmp/
+temp/

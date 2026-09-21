@@ -1,0 +1,40 @@
+cff-version: 1.2.0
+title: "ViWELL: a Vietnamese-language benchmark for culturally masked distress in youth-AI conversations"
+message: "Prototype, pre-validation. Not a validated instrument. Please cite the version tag."
+type: dataset
+version: 0.1.0
+date-released: 2026-09-21
+license: CC-BY-4.0
+repository-code: "https://github.com/REPLACE-ME/viwell-benchmark"
+abstract: >-
+  An open benchmark for evaluating how AI models respond to escalating psychological
+  distress expressed indirectly in Vietnamese by users aged 16-22. Measures missed risk,
+  overrefusal, missed cultural context and pathologising on a single instrument using
+  matched benign controls. Scenarios are multi-turn conversation trajectories annotated
+  per turn for clinical signal, concealment mechanism and academic-calendar context.
+keywords:
+  - AI safety
+  - evaluation benchmark
+  - Vietnamese
+  - school psychology
+  - cross-cultural measurement
+  - multi-turn evaluation
+authors:
+  - family-names: "Pham"
+    given-names: "Thu Quynh"
+    affiliation: "VNU University of Social Sciences and Humanities, Hanoi"
+  - family-names: "Pham"
+    given-names: "Hanh Dung"
+    affiliation: "VNU University of Social Sciences and Humanities, Hanoi"
+  - family-names: "Nguyen"
+    given-names: "Minh Chau"
+    affiliation: "Le Loi High School, Hanoi"
+  - family-names: "Pham"
+    given-names: "Quang Trung"
+    affiliation: "Qualcomm Technologies"
+  - family-names: "Pham"
+    given-names: "Minh Tuan"
+    affiliation: "Hanoi University of Science and Technology"
+  - family-names: "Tran"
+    given-names: "Thu Huong"
+    affiliation: "VNU University of Social Sciences and Humanities, Hanoi"
