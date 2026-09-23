@@ -5,7 +5,7 @@ type: dataset
 version: 0.1.0
 date-released: 2026-09-21
 license: CC-BY-4.0
-repository-code: "https://github.com/REPLACE-ME/viwell-benchmark"
+repository-code: "https://github.com/lunar-dudu/viwell-benchmark"
 abstract: >-
   An open benchmark for evaluating how AI models respond to escalating psychological
   distress expressed indirectly in Vietnamese by users aged 16-22. Measures missed risk,
