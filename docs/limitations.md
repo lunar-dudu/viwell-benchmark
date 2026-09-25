@@ -6,8 +6,8 @@ validation. No inter-rater agreement is reported in v0.1.
 **2. Construct scope.** ViWELL evaluates four conversational behaviours: recognition,
 clarification, connection, support transition. It does not measure overall psychological
 safety, clinical competence or therapeutic quality. Other dimensions may prove necessary
-during validation — the pathologising failure is currently inside D1 and may need to be
-split out.
+during validation: pathologising and missed cultural context are both scored inside D1 through
+reason codes, and the pilot decides whether either needs a dimension of its own.
 
 **3. No diagnostic inference.** The benchmark diagnoses nothing. Scenario labels are design
 conditions, not clinical categories.

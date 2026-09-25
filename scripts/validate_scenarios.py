@@ -54,6 +54,10 @@ def main():
     for sid, d in scen.items():
         turns = {t["turn_id"] for t in d["conversation"]}
 
+        first = d["conversation"][0]
+        if first.get("risk_level", 0) > 0 or first.get("signals"):
+            errors.append(f"{sid}: turn 1 must be ordinary (no signals, risk_level 0)")
+
         expected = list(range(1, len(d["conversation"]) + 1))
         if [t["turn_id"] for t in d["conversation"]] != expected:
             errors.append(f"{sid}: turn_id must run 1..N with no gaps")
@@ -86,8 +90,8 @@ def main():
                 errors.append(f"{sid}: pair_id {pid} does not point back")
         elif d["arm"] == "risk":
             warnings.append(f"{sid}: risk scenario has no paired benign control. "
-                            f"Paired controls are the core of the design; an unpaired "
-                            f"risk scenario cannot measure overrefusal.")
+                            f"Without one, overrefusal can only be tested before the "
+                            f"recognition threshold, not on a benign conversation.")
 
         # control must be identical to its twin up to the branch point
         if d["arm"] == "control":
@@ -96,15 +100,22 @@ def main():
             if not twin:
                 errors.append(f"{sid}: branch_from names {bf['scenario_id']}, which is missing")
             else:
-                a = {t["turn_id"]: t["text"] for t in twin["conversation"]}
-                b = {t["turn_id"]: t["text"] for t in d["conversation"]}
+                keys = ("text", "signals", "risk_level", "note", "material_cue")
+                a = {t["turn_id"]: t for t in twin["conversation"]}
+                b = {t["turn_id"]: t for t in d["conversation"]}
                 for n in range(1, bf["turn_id"] + 1):
-                    if a.get(n) != b.get(n):
-                        errors.append(f"{sid}: turn {n} differs from {bf['scenario_id']} but "
-                                      f"falls before the branch point at turn {bf['turn_id']}. "
-                                      f"A control that differs before branching is not matched.")
-            if any(t.get("risk_level", 0) > 0 for t in d["conversation"]):
-                warnings.append(f"{sid}: control arm has turns with risk_level > 0")
+                    for k in keys:
+                        if a.get(n, {}).get(k) != b.get(n, {}).get(k):
+                            errors.append(f"{sid}: turn {n} field '{k}' differs from "
+                                          f"{bf['scenario_id']} before the branch point at turn "
+                                          f"{bf['turn_id']}. Before branching the arms must be "
+                                          f"identical in text and annotation.")
+                if d["design"] != {k: v for k, v in twin["design"].items()
+                                   if k != "concealment_mechanism"}:
+                    errors.append(f"{sid}: a control must record the same design cell as its twin")
+            if any(t.get("risk_level", 0) > 0 for t in d["conversation"]
+                   if t["turn_id"] > d["branch_from"]["turn_id"]):
+                warnings.append(f"{sid}: control arm has risk_level > 0 after the branch point")
 
     # coverage report
     cells = {}
@@ -118,6 +129,8 @@ def main():
     print(f"{len(scen)} scenarios, {len(cells)} of 36 design cells occupied")
     mech = {}
     for d in scen.values():
+        if d["arm"] != "risk":
+            continue
         m = d["design"].get("concealment_mechanism")
         if m:
             mech[m] = mech.get(m, 0) + 1

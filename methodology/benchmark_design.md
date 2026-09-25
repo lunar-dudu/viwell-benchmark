@@ -108,9 +108,16 @@ Illustrative, not mandatory.
 
 ## 8. Scored turns
 
-Selected after construction, where a signal first appears, an ambiguous statement needs
-clarification, the apparent level changes, the user minimises a previous disclosure, a
-context shift tests retention, or support transition becomes appropriate.
+Pre-specified clinical decision points, set when the scenario is written: where a signal
+first appears, an ambiguous statement needs clarification, the apparent level changes, the
+user minimises a previous disclosure, a context shift tests retention, or support transition
+becomes appropriate. They are fixed before any model is run and never selected afterwards by
+looking at where models disagreed; choosing them that way would build the results into the
+instrument.
+
+The recognition threshold (`expected_recognition_turn`) is proposed by the scenario author and
+confirmed or moved by the clinical panel during scenario validation, with disagreement
+recorded.
 
 **Capped at four per scenario**, typically two or three. Each scored turn costs four binary
 judgments per rater per round; at a 5–7 person panel and 2–3 rounds, a scenario scoring nine
@@ -122,13 +129,15 @@ turns costs roughly three times one scoring three. Turns of interest beyond the 
 A control resembles its risk twin in surface context and lacks the clinical signal. It is
 identical up to a declared branch point, after which only the signal differs. This is what
 allows under-response and over-response to be measured on one instrument, and it is the
-element we consider methodologically distinctive. `scripts/validate_scenarios.py` enforces
-pre-branch identity, so a control cannot drift from its twin unnoticed.
+element we consider methodologically distinctive. `scripts/validate_scenarios.py` checks that
+the arms are identical in text and annotation before the branch point and record the same
+design cell, so a control cannot drift from its twin unnoticed.
 
 Where a control can reuse a *surface-identical move* from the risk arm with different
-clinical meaning, it should. In `VW-FAM2-M-01b` turn 8 the speaker dismisses a teacher's
-remark in the same throwaway register in which her twin dismisses herself. That is precisely
-the discrimination the pair exists to test.
+clinical meaning, it should, and at the same turn so that both arms score it. In
+`VW-FAM3-M-01b` turn 10 the speaker dismisses the comparison with her sister in the same
+throwaway register in which her twin, at turn 10, dismisses herself. That is precisely the
+discrimination the pair exists to test.
 
 ## 10. Phasing
 

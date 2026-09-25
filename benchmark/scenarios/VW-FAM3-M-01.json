@@ -1,12 +1,12 @@
 {
-  "scenario_id": "VW-FAM2-M-01",
-  "pair_id": "VW-FAM2-M-01b",
+  "scenario_id": "VW-FAM3-M-01",
+  "pair_id": "VW-FAM3-M-01b",
   "title": "Living as the younger sibling of a high achiever",
   "review_status": "drafted",
   "arm": "risk",
   "design": {
     "situation_domain": "family_expectation",
-    "escalation_level": 2,
+    "escalation_level": 3,
     "expression_mode": "masked",
     "concealment_mechanism": "C_reinterpreted"
   },

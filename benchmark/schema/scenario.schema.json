@@ -3,8 +3,18 @@
   "$id": "https://github.com/viwell/viwell-benchmark/benchmark/schema/scenario.schema.json",
   "title": "ViWELL scenario",
   "type": "object",
-  "required": ["scenario_id", "title", "review_status", "arm", "design", "persona",
-               "temporal_context", "conversation", "scored_turns", "constructs_tested"],
+  "required": [
+    "scenario_id",
+    "title",
+    "review_status",
+    "arm",
+    "design",
+    "persona",
+    "temporal_context",
+    "conversation",
+    "scored_turns",
+    "constructs_tested"
+  ],
   "additionalProperties": false,
   "properties": {
     "scenario_id": {
@@ -13,69 +23,165 @@
       "description": "VW-<domain><escalation>-<mode: D=direct, M=masked>-<variant>. Trailing 'b' marks the paired benign control."
     },
     "pair_id": {
-      "type": ["string", "null"],
+      "type": [
+        "string",
+        "null"
+      ],
       "description": "scenario_id of the matched counterpart. Null only while the pair is unwritten."
     },
-    "title": { "type": "string" },
+    "title": {
+      "type": "string"
+    },
     "review_status": {
-      "enum": ["drafted", "peer_reviewed", "clinically_reviewed", "pilot_tested", "retired"],
+      "enum": [
+        "drafted",
+        "peer_reviewed",
+        "clinically_reviewed",
+        "pilot_tested",
+        "retired"
+      ],
       "description": "Where this scenario sits in the review pipeline. Nothing above 'drafted' until a named reviewer has signed off in review_log."
     },
     "review_log": {
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["date", "reviewer_role", "outcome"],
+        "required": [
+          "date",
+          "reviewer_role",
+          "outcome"
+        ],
         "additionalProperties": false,
         "properties": {
-          "date": { "type": "string", "format": "date" },
-          "reviewer_role": { "enum": ["school_counsellor", "clinical_psychologist", "methodologist"] },
-          "outcome": { "enum": ["accepted", "revised", "rejected"] },
-          "note": { "type": "string" }
+          "date": {
+            "type": "string",
+            "format": "date"
+          },
+          "reviewer_role": {
+            "enum": [
+              "school_counsellor",
+              "clinical_psychologist",
+              "methodologist"
+            ]
+          },
+          "outcome": {
+            "enum": [
+              "accepted",
+              "revised",
+              "rejected"
+            ]
+          },
+          "note": {
+            "type": "string"
+          }
         }
       }
     },
-    "arm": { "enum": ["risk", "control"] },
+    "arm": {
+      "enum": [
+        "risk",
+        "control"
+      ]
+    },
     "design": {
       "type": "object",
-      "required": ["situation_domain", "escalation_level", "expression_mode"],
+      "required": [
+        "situation_domain",
+        "escalation_level",
+        "expression_mode"
+      ],
       "additionalProperties": false,
       "properties": {
         "situation_domain": {
-          "enum": ["academic_performance", "family_expectation", "social_exclusion",
-                   "belonging_new_environment", "loss_life_disruption", "close_relationship_conflict"]
+          "enum": [
+            "academic_performance",
+            "family_expectation",
+            "social_exclusion",
+            "belonging_new_environment",
+            "loss_life_disruption",
+            "close_relationship_conflict"
+          ]
         },
-        "escalation_level": { "type": "integer", "minimum": 1, "maximum": 3 },
-        "expression_mode": { "enum": ["direct", "masked"] },
+        "escalation_level": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 3
+        },
+        "expression_mode": {
+          "enum": [
+            "direct",
+            "masked"
+          ]
+        },
         "concealment_mechanism": {
-          "enum": ["A_permitted_subject", "B_withheld_fragmented", "C_reinterpreted"],
-          "description": "Required when expression_mode is 'masked'; absent when 'direct'."
+          "enum": [
+            "A_permitted_subject",
+            "B_withheld_fragmented",
+            "C_reinterpreted"
+          ],
+          "description": "Required for masked risk scenarios; omitted on controls, which conceal nothing. Records the primary mechanism where more than one is present."
         }
-      }
+      },
+      "description": "The design cell. On a control, these fields record the cell it is the control for, which is the cell of its risk twin."
     },
     "persona": {
       "type": "object",
-      "required": ["age", "role"],
+      "required": [
+        "age",
+        "role"
+      ],
       "additionalProperties": false,
       "properties": {
-        "age": { "type": "integer", "minimum": 16, "maximum": 22 },
-        "role": { "enum": ["upper_secondary_student", "university_student", "recent_leaver"] },
-        "setting": { "type": "string" },
-        "gender": { "type": "string" }
+        "age": {
+          "type": "integer",
+          "minimum": 16,
+          "maximum": 22
+        },
+        "role": {
+          "enum": [
+            "upper_secondary_student",
+            "university_student",
+            "recent_leaver"
+          ]
+        },
+        "setting": {
+          "type": "string"
+        },
+        "gender": {
+          "type": "string"
+        }
       }
     },
     "temporal_context": {
       "type": "object",
-      "required": ["academic_period", "stated_by_user"],
+      "required": [
+        "academic_period",
+        "stated_by_user"
+      ],
       "additionalProperties": false,
       "properties": {
         "academic_period": {
-          "enum": ["dau-nam-hoc", "giua-hoc-ky", "tra-diem-giua-ky", "truoc-tet", "sau-tet",
-                   "mua-thi-cuoi-ky", "tra-diem-cuoi-ky", "mua-thi-dai-hoc", "tuan-dau-xa-nha", "nghi-he"],
+          "enum": [
+            "dau-nam-hoc",
+            "giua-hoc-ky",
+            "tra-diem-giua-ky",
+            "truoc-tet",
+            "sau-tet",
+            "mua-thi-cuoi-ky",
+            "tra-diem-cuoi-ky",
+            "mua-thi-dai-hoc",
+            "tuan-dau-xa-nha",
+            "nghi-he"
+          ],
           "description": "Where in the Vietnamese academic year the conversation sits. This is calendar position, not duration of the problem."
         },
-        "approximate_date": { "type": "string" },
-        "salience": { "type": "string", "description": "One sentence: how this period raises or lowers the weight of the signal." },
+        "approximate_date": {
+          "type": "string"
+        },
+        "salience": {
+          "type": "string",
+          "description": "One sentence: how this period raises or lowers the weight of the signal."
+        },
         "stated_by_user": {
           "type": "boolean",
           "description": "false means the model must infer the period from context. That is the harder and more informative condition."
@@ -87,16 +193,45 @@
       "minItems": 6,
       "items": {
         "type": "object",
-        "required": ["turn_id", "speaker", "text"],
+        "required": [
+          "turn_id",
+          "speaker",
+          "text"
+        ],
         "additionalProperties": false,
         "properties": {
-          "turn_id": { "type": "integer", "minimum": 1 },
-          "speaker": { "const": "user" },
-          "text": { "type": "string", "minLength": 1 },
-          "gloss_en": { "type": "string" },
-          "signals": { "type": "array", "items": { "type": "string" } },
-          "risk_level": { "type": "integer", "minimum": 0, "maximum": 3 },
-          "note": { "type": "string" }
+          "turn_id": {
+            "type": "integer",
+            "minimum": 1
+          },
+          "speaker": {
+            "const": "user"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1
+          },
+          "gloss_en": {
+            "type": "string"
+          },
+          "signals": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "risk_level": {
+            "type": "integer",
+            "minimum": 0,
+            "maximum": 3
+          },
+          "note": {
+            "type": "string"
+          },
+          "material_cue": {
+            "type": "string",
+            "description": "A culturally meaningful cue in this turn that the author judges should change the reading. Raters confirm or reject it; only a confirmed cue can ground a missed-cultural-context failure."
+          }
         }
       }
     },
@@ -108,43 +243,96 @@
       "type": "array",
       "minItems": 1,
       "maxItems": 4,
-      "items": { "type": "integer" },
-      "description": "User turns whose MODEL REPLY the expert panel scores. Capped at 4: every entry costs 4 binary judgments per rater per round."
+      "items": {
+        "type": "integer"
+      },
+      "description": "User turns whose MODEL REPLY is scored. Pre-specified when the scenario is written and fixed before any model is run. Typically 2-3, never more than 4: each entry costs four binary judgments per rater per round."
     },
     "candidate_turns": {
       "type": "array",
-      "items": { "type": "integer" },
+      "items": {
+        "type": "integer"
+      },
       "description": "Turns of analytic interest that are NOT in the annotation budget. Recorded only so later versions can promote them."
     },
     "branch_from": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["scenario_id", "turn_id"],
+      "required": [
+        "scenario_id",
+        "turn_id"
+      ],
       "properties": {
-        "scenario_id": { "type": "string" },
-        "turn_id": { "type": "integer" }
+        "scenario_id": {
+          "type": "string"
+        },
+        "turn_id": {
+          "type": "integer"
+        }
       },
       "description": "Controls only: the scenario and turn up to which this file is identical to its risk twin."
     },
-    "constructs_tested": { "type": "array", "items": { "type": "string" } },
+    "constructs_tested": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
     "provenance": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["construction"],
+      "required": [
+        "construction"
+      ],
       "properties": {
-        "construction": { "const": "synthetic_composite" },
-        "note": { "type": "string" }
+        "construction": {
+          "const": "synthetic_composite"
+        },
+        "note": {
+          "type": "string"
+        }
       }
     }
   },
   "allOf": [
     {
-      "if": { "properties": { "design": { "properties": { "expression_mode": { "const": "masked" } } } } },
-      "then": { "properties": { "design": { "required": ["concealment_mechanism"] } } }
+      "if": {
+        "properties": {
+          "arm": {
+            "const": "risk"
+          },
+          "design": {
+            "properties": {
+              "expression_mode": {
+                "const": "masked"
+              }
+            }
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "design": {
+            "required": [
+              "concealment_mechanism"
+            ]
+          }
+        }
+      }
     },
     {
-      "if": { "properties": { "arm": { "const": "control" } } },
-      "then": { "required": ["branch_from"] }
+      "if": {
+        "properties": {
+          "arm": {
+            "const": "control"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "branch_from"
+        ]
+      }
     }
   ]
 }

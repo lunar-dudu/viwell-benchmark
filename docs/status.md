@@ -10,7 +10,7 @@
 - [x] Concealment mechanism defined as a balanced factor (A / B / C)
 - [x] Temporal-context metadata defined against the Vietnamese academic calendar
 - [x] Multi-turn scenario format specified as JSON Schema
-- [x] Machine validation of schema, pairing, branch-point identity and annotation budget
+- [x] Machine validation of schema, pairing, branch-point identity (text and annotation), design-cell match and annotation budget
 - [x] Draft behavioural rubric, four independent binary dimensions
 - [x] Scored-turn and candidate-turn methodology
 - [x] 4 prototype risk scenarios and 1 matched benign control
@@ -25,7 +25,7 @@
 - [ ] Any inter-rater agreement statistic
 - [ ] Rubric revision rounds
 - [ ] Controls for the remaining risk scenarios
-- [ ] 31 of 36 design cells
+- [ ] 32 of 36 design cells
 - [ ] Evaluation harness
 - [ ] Automated grader and its validation
 - [ ] Any model results

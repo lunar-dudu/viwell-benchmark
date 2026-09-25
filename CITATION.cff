@@ -5,13 +5,14 @@ type: dataset
 version: 0.1.0
 date-released: 2026-09-21
 license: CC-BY-4.0
-repository-code: "https://github.com/lunar-dudu/viwell-benchmark"
+repository-code: "https://github.com/REPLACE-ME/viwell-benchmark"
 abstract: >-
   An open benchmark for evaluating how AI models respond to escalating psychological
   distress expressed indirectly in Vietnamese by users aged 16-22. Measures missed risk,
   overrefusal, missed cultural context and pathologising on a single instrument using
   matched benign controls. Scenarios are multi-turn conversation trajectories annotated
-  per turn for clinical signal, concealment mechanism and academic-calendar context.
+  per turn for clinical signal, and per scenario for concealment mechanism and
+  academic-calendar context.
 keywords:
   - AI safety
   - evaluation benchmark
